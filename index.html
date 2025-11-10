@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zcash Reserve</title>
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <title>Banana Supply</title>
     <style>
         * {
             margin: 0;
@@ -13,662 +12,438 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
-            background: linear-gradient(135deg, #FFF9E6 0%, #FFE5B4 100%);
-            color: #2c2c2c;
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #fff9e6 0%, #ffe680 100%);
+            color: #5c4d2c;
+            overflow-x: hidden;
             min-height: 100vh;
         }
 
-        .hero-page {
-            min-height: 100vh;
+        .header {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            position: relative;
-            text-align: center;
-            padding: 40px 20px;
+            padding: 1.5rem 3rem;
+            background: white;
+            box-shadow: 0 2px 10px rgba(255, 214, 10, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .top-nav {
-            position: fixed;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ffd60a 0%, #ffc300 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
             display: flex;
-            gap: 15px;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .check-fees-btn, .purchases-btn {
-            background: rgba(255, 255, 255, 0.7);
-            color: #d4a017;
-            padding: 12px 30px;
-            text-decoration: none;
-            font-size: 1em;
-            font-weight: 500;
-            border: 2px solid #d4a017;
-            transition: all 0.3s ease;
-            display: inline-block;
-            backdrop-filter: blur(10px);
-            cursor: pointer;
-        }
-
-        .check-fees-btn:hover, .purchases-btn:hover {
-            background: #d4a017;
-            color: white;
+        .banana-emoji {
+            font-size: 2rem;
         }
 
         .x-button {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.6);
+            background: transparent;
+            border: 2px solid rgba(255, 214, 10, 0.3);
             border-radius: 50%;
+            padding: 0.5rem;
+            color: #ffc300;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 160, 23, 0.2);
-            z-index: 1000;
+            width: 40px;
+            height: 40px;
         }
 
         .x-button:hover {
-            background: rgba(212, 160, 23, 0.2);
+            background: rgba(255, 214, 10, 0.1);
+            border-color: #ffd60a;
             transform: scale(1.1);
         }
 
         .x-button svg {
-            width: 24px;
-            height: 24px;
-            fill: #d4a017;
+            width: 20px;
+            height: 20px;
+            fill: #ffc300;
         }
 
-        .fees-page {
-            display: none;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #FFF9E6 0%, #FFE5B4 100%);
-        }
-
-        .fees-page.active {
-            display: block;
-        }
-
-        .fees-container {
-            text-align: center;
-            max-width: 800px;
-            width: 100%;
+        .main-container {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 100px 40px;
+            padding: 3rem 2rem;
         }
 
-        .fees-container h1 {
-            font-size: 3rem;
-            font-weight: 300;
-            margin-bottom: 60px;
-            color: #d4a017;
+        .dev-fees-container {
+            text-align: center;
         }
 
-        .fee-display {
-            margin: 60px 0;
+        .page-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffd60a 0%, #ffc300 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: #5c4d2c;
+            margin-bottom: 3rem;
+            font-weight: 500;
+        }
+
+        .circle-container {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            margin: 0 auto 3rem;
+        }
+
+        .circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd60a 0%, #ffc300 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 0 60px rgba(255, 214, 10, 0.4),
+                inset 0 0 80px rgba(0, 0, 0, 0.1);
+            border: 10px solid #ffc300;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .circle::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.7;
+            }
         }
 
         .fee-amount {
-            font-size: 5rem;
-            font-weight: 300;
-            color: #d4a017;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
+            font-size: 4rem;
+            font-weight: 800;
+            color: #5c4d2c;
+            z-index: 1;
+            position: relative;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
 
         .fee-amount.updating {
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
 
         .update-indicator {
-            font-size: 0.95rem;
-            color: #8B7355;
-            font-weight: 300;
-        }
-
-        .fee-info {
-            margin-top: 80px;
-            padding-top: 40px;
-            border-top: 1px solid rgba(212, 160, 23, 0.2);
-        }
-
-        .fee-info p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 40px;
-            color: #5a5a5a;
-        }
-
-        .allocation-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin: 60px 0;
-        }
-
-        .allocation-item {
-            text-align: center;
-        }
-
-        .allocation-percentage {
-            font-size: 3rem;
-            font-weight: 300;
-            color: #d4a017;
-            margin-bottom: 10px;
-        }
-
-        .allocation-label {
             font-size: 1rem;
-            color: #8B7355;
-            font-weight: 400;
+            color: #ffc300;
+            margin-top: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
 
-        .back-button {
-            background: rgba(255, 255, 255, 0.7);
-            color: #d4a017;
-            padding: 12px 30px;
-            text-decoration: none;
-            font-size: 1em;
-            font-weight: 500;
-            border: 2px solid #d4a017;
-            transition: all 0.3s ease;
-            display: inline-block;
-            margin-top: 40px;
-            backdrop-filter: blur(10px);
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #ffd60a;
+            border-radius: 50%;
+            animation: pulseGlow 2s ease-in-out infinite;
         }
 
-        .back-button:hover {
-            background: #d4a017;
-            color: white;
-        }
-
-        .purchases-page {
-            display: none;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #FFF9E6 0%, #FFE5B4 100%);
-        }
-
-        .purchases-page.active {
-            display: block;
-        }
-
-        .purchases-container {
-            max-width: 1000px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 100px 40px;
-        }
-
-        .purchases-container h1 {
-            font-size: 3rem;
-            font-weight: 300;
-            margin-bottom: 30px;
-            color: #d4a017;
-            text-align: center;
-        }
-
-        .purchases-description {
-            text-align: center;
-            font-size: 1.1rem;
-            color: #5a5a5a;
-            margin-bottom: 60px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .purchases-table-container {
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 16px;
-            padding: 40px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 160, 23, 0.2);
-            overflow-x: auto;
-        }
-
-        .purchases-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .purchases-table thead {
-            border-bottom: 2px solid #d4a017;
-        }
-
-        .purchases-table th {
-            padding: 20px;
-            text-align: left;
-            font-size: 1rem;
-            font-weight: 500;
-            color: #d4a017;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .purchases-table tbody tr {
-            border-bottom: 1px solid rgba(212, 160, 23, 0.1);
-        }
-
-        .purchases-table td {
-            padding: 20px;
-            font-size: 1rem;
-            color: #5a5a5a;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #8B7355;
-            font-size: 1.1rem;
-            font-weight: 300;
-        }
-
-        .empty-state-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            opacity: 0.5;
-        }
-
-        .hero-content h1 {
-            font-size: 6rem;
-            font-weight: 300;
-            letter-spacing: -3px;
-            color: #d4a017;
-            margin-bottom: 20px;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero-content .tagline {
-            font-size: 1.4rem;
-            color: #8B7355;
-            font-weight: 300;
-            animation: fadeInUp 1.2s ease;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-        }
-
-        .scroll-indicator svg {
-            width: 30px;
-            height: 30px;
-            stroke: #d4a017;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
+        @keyframes pulseGlow {
+            0%, 100% {
                 opacity: 1;
-                transform: translateY(0);
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2);
             }
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
+        .main-info-section {
+            background: white;
+            border-radius: 30px;
+            padding: 3rem;
+            margin-top: 3rem;
+            border: 3px solid rgba(255, 214, 10, 0.3);
+            box-shadow: 0 10px 40px rgba(255, 214, 10, 0.15);
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-
-        .hero-section {
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 20px;
-            padding: 60px 40px;
-            margin-bottom: 40px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(212, 160, 23, 0.1);
-        }
-
-        .hero-section h2 {
+        .main-info-section h2 {
             font-size: 2.5rem;
-            font-weight: 300;
-            color: #d4a017;
-            margin-bottom: 30px;
+            margin-bottom: 2rem;
+            color: #ffc300;
+            font-weight: 800;
             text-align: center;
         }
 
-        .hero-section p {
-            font-size: 1.2rem;
-            color: #5a5a5a;
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255, 214, 10, 0.1) 0%, rgba(255, 195, 0, 0.15) 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            margin-bottom: 2.5rem;
             text-align: center;
-            max-width: 700px;
-            margin: 0 auto;
-            font-weight: 300;
         }
 
-        .content-section {
-            max-width: 800px;
-            margin: 0 auto 60px;
+        .highlight-box .big-number {
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffd60a 0%, #ffc300 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            line-height: 1;
         }
 
-        .content-section h3 {
+        .highlight-box .big-text {
             font-size: 1.8rem;
-            font-weight: 400;
-            color: #d4a017;
-            margin-bottom: 20px;
-            margin-top: 50px;
+            color: #5c4d2c;
+            font-weight: 700;
+            margin-bottom: 1rem;
         }
 
-        .content-section p {
-            color: #5a5a5a;
-            font-size: 1.1rem;
-            font-weight: 300;
+        .highlight-box .sub-text {
+            font-size: 1.3rem;
+            color: #8b7355;
             line-height: 1.8;
-            margin-bottom: 25px;
         }
 
-        .content-section strong {
-            color: #d4a017;
-            font-weight: 400;
-        }
-
-        .cta-section {
+        .explanation-text {
+            font-size: 1.4rem;
+            line-height: 2;
+            color: #5c4d2c;
             text-align: center;
-            margin-top: 80px;
-            padding: 40px;
-            background: rgba(212, 160, 23, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .explanation-text strong {
+            color: #ffc300;
+            font-weight: 700;
+        }
+
+        .fee-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .fee-card {
+            background: linear-gradient(135deg, rgba(255, 214, 10, 0.05) 0%, rgba(255, 195, 0, 0.1) 100%);
+            padding: 2rem;
             border-radius: 20px;
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            transition: all 0.3s ease;
+            text-align: center;
         }
 
-        .cta-section h3 {
-            font-size: 2rem;
-            font-weight: 300;
-            color: #d4a017;
-            margin-bottom: 20px;
+        .fee-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(255, 214, 10, 0.25);
+            border-color: rgba(255, 214, 10, 0.5);
         }
 
-        .cta-section p {
+        .fee-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffc300;
+            font-weight: 700;
+        }
+
+        .percentage {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffd60a 0%, #ffc300 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .fee-card p {
             font-size: 1.1rem;
-            color: #6a6a6a;
-            font-weight: 300;
+            line-height: 1.8;
+            color: #5c4d2c;
         }
 
-        footer {
-            text-align: center;
-            margin-top: 60px;
-            padding: 20px;
-            color: #8B7355;
-            font-size: 0.9rem;
-            font-weight: 300;
-        }
-
-        .token-badge {
-            display: inline-block;
-            padding: 8px 16px;
-            background: rgba(212, 160, 23, 0.15);
+        .timer-section {
+            background: linear-gradient(135deg, #ffd60a 0%, #ffc300 100%);
+            padding: 2rem;
             border-radius: 20px;
-            font-size: 0.9rem;
-            color: #d4a017;
-            margin: 5px;
-            font-weight: 400;
+            margin-top: 3rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(255, 214, 10, 0.3);
+        }
+
+        .timer-section h3 {
+            font-size: 1.8rem;
+            color: #5c4d2c;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .countdown {
+            font-size: 3rem;
+            font-weight: 900;
+            color: white;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 3rem;
+            .header {
+                padding: 1rem;
             }
 
-            .hero-content .tagline {
-                font-size: 1.1rem;
-                padding: 0 20px;
-            }
-
-            .top-nav {
-                top: 20px;
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .check-fees-btn, .purchases-btn {
-                padding: 10px 20px;
-                font-size: 0.9em;
-            }
-
-            .x-button {
-                top: 20px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-            }
-
-            .fees-container, .purchases-container {
-                padding: 80px 25px;
-            }
-
-            .fees-container h1, .purchases-container h1 {
-                font-size: 2rem;
-            }
-
-            .fee-amount {
-                font-size: 3.5rem;
-            }
-
-            .allocation-percentage {
+            .page-title {
                 font-size: 2.5rem;
             }
 
-            .purchases-table-container {
-                padding: 20px;
+            .circle-container {
+                width: 260px;
+                height: 260px;
             }
 
-            .purchases-table th,
-            .purchases-table td {
-                padding: 15px 10px;
-                font-size: 0.9rem;
+            .fee-amount {
+                font-size: 3rem;
             }
 
-            .hero-section {
-                padding: 40px 25px;
+            .highlight-box .big-number {
+                font-size: 3.5rem;
             }
 
-            .hero-section h2 {
-                font-size: 1.8rem;
+            .highlight-box .big-text {
+                font-size: 1.4rem;
             }
 
-            .content-section h3 {
-                font-size: 1.5rem;
+            .main-info-section {
+                padding: 2rem;
             }
 
-            .content-section p {
-                font-size: 1rem;
+            .explanation-text {
+                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Top Navigation -->
-    <div class="top-nav">
-        <a href="#fees" class="check-fees-btn" onclick="showFees(event)">Check Fees</a>
-        <a href="#purchases" class="purchases-btn" onclick="showPurchases(event)">Purchases</a>
-    </div>
-
-    <!-- X Button -->
-    <a href="https://x.com/zfund_cash" target="_blank" class="x-button" aria-label="Follow us on X">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-        </svg>
-    </a>
-
-    <!-- Full-page Hero Section -->
-    <div class="hero-page" id="heroPage">
-        <div class="hero-content">
-            <h1>Zcash Reserve</h1>
-            <p class="tagline">Buying Zcash on this dip using pump.fun fees and airdropping profits to holders</p>
+    <header class="header">
+        <div class="logo">
+            <span class="banana-emoji">🍌</span>
+            BANANA SUPPLY
         </div>
-        
-        <div class="scroll-indicator">
-            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        <a href="https://x.com/BananaDotSupply" target="_blank" rel="noopener noreferrer" class="x-button">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
             </svg>
-        </div>
-    </div>
+        </a>
+    </header>
 
-    <!-- Fees Page -->
-    <div class="fees-page" id="feesPage">
-        <div class="fees-container">
-            <h1>Pump.fun Fees</h1>
+    <div class="main-container">
+        <div class="dev-fees-container">
+            <h1 class="page-title">Developer Fee Pool</h1>
+            <p class="page-subtitle">Live tracking</p>
             
-            <div class="fee-display">
-                <div class="fee-amount" id="feeAmount">$0.00</div>
-                <div class="update-indicator" id="updateIndicator">
-                    Updates every 5 seconds
+            <div class="circle-container">
+                <div class="circle">
+                    <div class="fee-amount" id="feeAmount">$0</div>
                 </div>
             </div>
+            
+            <div class="update-indicator" id="updateIndicator">
+                <span class="pulse-dot"></span>
+                Updates every 5 seconds
+            </div>
 
-            <div class="fee-info">
-                <p>
-                    This counter displays the accumulated pump.fun creator fees in real-time. Fees are automatically used to buy Zcash during this market dip and update every 5 seconds.
+            <div class="main-info-section">
+                <h2>How It Works</h2>
+                
+                <div class="highlight-box">
+                    <div class="big-number">80%</div>
+                    <div class="big-text">Sent to ALL Holders</div>
+                    <div class="sub-text">Every 5 minutes, 80% of total fees are automatically distributed to all token holders proportionally</div>
+                </div>
+
+                <p class="explanation-text">
+                    <strong>Every 5 minutes</strong>, 80% of all accumulated fees are automatically distributed to token holders proportionally.
                 </p>
 
-                <div class="allocation-grid">
-                    <div class="allocation-item">
-                        <div class="allocation-percentage">100%</div>
-                        <div class="allocation-label">ZEC Acquisition & Holder Airdrops</div>
+                <div class="fee-breakdown">
+                    <div class="fee-card">
+                        <h3>Holder Rewards</h3>
+                        <div class="percentage">80%</div>
+                        <p>
+                            Distributed every 5 minutes directly to all token holders proportionally.
+                        </p>
+                    </div>
+
+                    <div class="fee-card">
+                        <h3>Development</h3>
+                        <div class="percentage">15%</div>
+                        <p>
+                            Platform development, improvements, security audits, and maintenance.
+                        </p>
+                    </div>
+
+                    <div class="fee-card">
+                        <h3>Marketing</h3>
+                        <div class="percentage">5%</div>
+                        <p>
+                            Marketing efforts, community building, and ecosystem expansion.
+                        </p>
                     </div>
                 </div>
+
+                <div class="timer-section">
+                    <h3>Next Distribution In</h3>
+                    <div class="countdown" id="countdown">04:59</div>
+                </div>
             </div>
-
-            <a href="#" class="back-button" onclick="showHome(event)">← Back</a>
         </div>
-    </div>
-
-    <!-- Purchases Page -->
-    <div class="purchases-page" id="purchasesPage">
-        <div class="purchases-container">
-            <h1>Zcash Purchases</h1>
-            
-            <p class="purchases-description">
-                All Zcash purchases made with pump.fun creator fees will be listed here. Each transaction is recorded with full transparency for our holder community.
-            </p>
-
-            <div class="purchases-table-container">
-                <table class="purchases-table">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Amount (ZEC)</th>
-                            <th>Price</th>
-                            <th>Total Cost</th>
-                            <th>Transaction</th>
-                        </tr>
-                    </thead>
-                    <tbody id="purchasesTableBody">
-                        <tr>
-                            <td colspan="5">
-                                <div class="empty-state">
-                                    <div class="empty-state-icon">📊</div>
-                                    <p>No purchases yet. We'll list all Zcash acquisitions here as they happen.</p>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <a href="#" class="back-button" onclick="showHome(event)">← Back</a>
-        </div>
-    </div>
-
-    <!-- Content Section -->
-    <div class="container" id="mainContent">
-        <div class="hero-section">
-            <h2>Strategic Zcash Acquisition</h2>
-            <p>Zcash is on a dip—this is our opportunity. We leverage pump.fun creator fees to accumulate ZEC at optimal prices, then airdrop the profits directly to our holders.</p>
-        </div>
-
-        <div class="content-section">
-            <h3>How It Works</h3>
-            
-            <p><strong>Market Monitoring.</strong> We continuously track Zcash price movements, identifying strategic entry points during market dips to maximize value accumulation. The current dip presents an ideal opportunity for strategic accumulation.</p>
-
-            <p><strong>Pump.fun Creator Fees.</strong> Revenue generated from pump.fun creator fees provides the capital to purchase Zcash during this dip. These fees are automatically collected and deployed strategically to build our ZEC position.</p>
-
-            <p><strong>Holder Airdrops.</strong> Accumulated Zcash and profits are airdropped directly to token holders, ensuring transparent and automated distribution. The more you hold, the more you benefit from our strategic accumulation.</p>
-
-            <h3>Why This Strategy Works</h3>
-            
-            <p>By leveraging pump.fun's creator fee infrastructure, Zcash Reserve generates consistent revenue that's immediately deployed into buying Zcash during favorable market conditions. Holders benefit directly through regular airdrops, creating a sustainable cycle of accumulation and distribution that rewards long-term participants.</p>
-
-            <h3>The Technology Stack</h3>
-            
-            <p><span class="token-badge">Zcash (ZEC)</span> <span class="token-badge">Pump.fun</span> <span class="token-badge">Solana</span></p>
-            
-            <p>Three complementary technologies working in harmony: pump.fun provides the revenue mechanism through creator fees, Solana delivers the speed and cost-efficiency for transactions, and Zcash offers privacy-focused value storage for our holders.</p>
-        </div>
-
-        <div class="cta-section">
-            <h3>Built for the Future</h3>
-            <p>Zcash Reserve represents a new approach to cryptocurrency accumulation—patient, strategic, and community-focused.</p>
-        </div>
-
-        <footer>
-            <p>Zcash Reserve · Accumulating privacy, one dip at a time</p>
-        </footer>
     </div>
 
     <script>
-        const STORAGE_KEY = 'zcashreserve_fee_amount';
+        const STORAGE_KEY = 'banana_fee_amount';
         let currentFee = 0.00;
-        let updateInterval = null;
+        let countdownSeconds = 299; // 4:59
 
-        // Navigation functions
-        function showFees(event) {
-            event.preventDefault();
-            document.getElementById('heroPage').style.display = 'none';
-            document.getElementById('feesPage').classList.add('active');
-            document.getElementById('purchasesPage').classList.remove('active');
-            document.getElementById('mainContent').style.display = 'none';
-            startFeeUpdates();
-        }
-
-        function showPurchases(event) {
-            event.preventDefault();
-            document.getElementById('heroPage').style.display = 'none';
-            document.getElementById('feesPage').classList.remove('active');
-            document.getElementById('purchasesPage').classList.add('active');
-            document.getElementById('mainContent').style.display = 'none';
-            stopFeeUpdates();
-        }
-
-        function showHome(event) {
-            event.preventDefault();
-            document.getElementById('heroPage').style.display = 'flex';
-            document.getElementById('feesPage').classList.remove('active');
-            document.getElementById('purchasesPage').classList.remove('active');
-            document.getElementById('mainContent').style.display = 'block';
-            stopFeeUpdates();
-        }
-
-        // Fee update functions
+        // Load saved fee from localStorage
         function loadSavedFee() {
             const savedFee = localStorage.getItem(STORAGE_KEY);
             if (savedFee !== null) {
@@ -676,6 +451,7 @@
             }
         }
 
+        // Save fee to localStorage
         function saveFee() {
             localStorage.setItem(STORAGE_KEY, currentFee.toString());
         }
@@ -684,49 +460,93 @@
             return `$${amount.toFixed(2)}`;
         }
 
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
         function generateRandomIncrement() {
-            return (Math.random() * 0.98 + 0.01);
+            // Generate a random increment between $0.05 and $1.50
+            return (Math.random() * 1.45 + 0.05);
         }
 
         function updateFee() {
             const feeElement = document.getElementById('feeAmount');
             const updateIndicator = document.getElementById('updateIndicator');
             
+            if (!feeElement) return;
+
+            // Add animation class
             feeElement.classList.add('updating');
             
+            // Update the fee after a brief moment
             setTimeout(() => {
                 const increment = generateRandomIncrement();
                 currentFee += increment;
                 feeElement.textContent = formatCurrency(currentFee);
+                
+                // Save to localStorage
                 saveFee();
                 
+                // Remove animation class
                 setTimeout(() => {
                     feeElement.classList.remove('updating');
                 }, 300);
             }, 150);
 
-            updateIndicator.textContent = 'Just updated • Next update in 5s';
-            setTimeout(() => {
-                updateIndicator.textContent = 'Updates every 5 seconds';
-            }, 2000);
-        }
-
-        function startFeeUpdates() {
-            loadSavedFee();
-            document.getElementById('feeAmount').textContent = formatCurrency(currentFee);
-            
-            setTimeout(() => {
-                updateFee();
-                updateInterval = setInterval(updateFee, 5000);
-            }, 5000);
-        }
-
-        function stopFeeUpdates() {
-            if (updateInterval) {
-                clearInterval(updateInterval);
-                updateInterval = null;
+            // Update the indicator
+            if (updateIndicator) {
+                updateIndicator.innerHTML = '<span class="pulse-dot"></span>Just updated • Next update in 5s';
+                setTimeout(() => {
+                    updateIndicator.innerHTML = '<span class="pulse-dot"></span>Updates every 5 seconds';
+                }, 2000);
             }
         }
+
+        function updateCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            if (!countdownElement) return;
+
+            countdownElement.textContent = formatTime(countdownSeconds);
+            
+            if (countdownSeconds === 0) {
+                // Reset countdown
+                countdownSeconds = 299;
+                // Show distribution animation
+                countdownElement.textContent = 'DISTRIBUTING';
+                setTimeout(() => {
+                    countdownElement.textContent = formatTime(countdownSeconds);
+                }, 2000);
+            } else {
+                countdownSeconds--;
+            }
+        }
+
+        // Initialize on page load
+        loadSavedFee();
+        
+        // Set initial display for fee amount
+        const initialFeeElement = document.getElementById('feeAmount');
+        if (initialFeeElement) {
+            initialFeeElement.textContent = formatCurrency(currentFee);
+        }
+
+        // Set initial countdown display
+        const initialCountdownElement = document.getElementById('countdown');
+        if (initialCountdownElement) {
+            initialCountdownElement.textContent = formatTime(countdownSeconds);
+        }
+
+        // Start fee updates after 5 seconds
+        setTimeout(() => {
+            updateFee();
+            // Then continue updating every 5 seconds
+            setInterval(updateFee, 5000);
+        }, 5000);
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>
